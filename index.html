@@ -91,36 +91,102 @@ body{
   text-transform:uppercase;
   pointer-events:none;
 }
+/* ══ TABLET (≤720px) ══ */
 @media(max-width:720px){
   .page{margin:24px auto 60px;padding:0 14px}
   .page-card{padding:36px 28px}
+  #thang-avatar{bottom:20px;left:20px}
+  .thang-card{width:72px}
+  .thang-face{width:72px;height:72px;font-size:32px}
+  .thang-name-tag{width:72px;font-size:0.58rem;padding:4px 0}
 }
-@media(max-width:480px){
-  .page{margin:16px auto 40px;padding:0 10px}
-  .page-card{padding:28px 18px}
-  .page-title{font-size:2rem}
-  .page-subtitle{font-size:1rem}
-  .grid-2{grid-template-columns:1fr}
-  .choice-row{flex-direction:column}
-  .choice-card{min-width:unset}
-  .thang-box{font-size:1.1rem;padding:18px 20px}
-  .btn{padding:12px 24px;font-size:0.82rem}
-  .section-label{font-size:0.6rem}
-  .input-label{font-size:0.72rem}
-  .sys-notif{max-width:85%;right:10px;font-size:0.78rem}
-  .debit-card{max-width:calc(100% - 40px);right:10px;font-size:0.72rem}
-  .calc-widget{right:10px;width:180px}
+
+/* ══ PHONE (≤600px) — Full Mobile Overhaul ══ */
+@media(max-width:600px){
+  /* Layout: more breathing room, clear fixed avatar */
+  .page{margin:12px auto 100px;padding:0 8px}
+  .page-card{padding:24px 16px}
+
+  /* Typography scaling */
+  .page-title{font-size:1.8rem;margin-bottom:6px}
+  .page-subtitle{font-size:0.95rem;margin-bottom:20px}
+  .section-label{font-size:0.58rem;letter-spacing:0.15em;margin-bottom:10px}
+  .input-label{font-size:0.7rem}
+  .fine-print{font-size:0.68rem}
+
+  /* Inputs */
+  input[type="text"],input[type="number"],input[type="email"],
+  input[type="tel"],input[type="password"],select,textarea{
+    padding:12px 14px;font-size:0.88rem;margin-bottom:12px
+  }
+  textarea{min-height:80px}
+
+  /* Grid & choices stack */
+  .grid-2{grid-template-columns:1fr;gap:10px}
+  .choice-row{flex-direction:column;gap:8px}
+  .choice-card{min-width:unset;padding:14px 16px;font-size:0.85rem}
+
+  /* Thangappan dialogue smaller */
+  .thang-box{font-size:1.05rem;padding:16px 18px;margin:20px 0 14px;line-height:1.75;border-radius:2px 14px 14px 14px}
+  .thang-box::before{top:-10px;left:18px;border-width:10px}
+  .thang-box .cursor{width:2px;height:0.95em}
+
+  /* Buttons — larger tap targets, smaller text */
+  .btn{padding:14px 20px;font-size:0.78rem;letter-spacing:0.03em;border-radius:var(--r-xs)}
+  .btn-full{padding:14px 16px}
+
+  /* ── Avatar: shrink to not overlap content ── */
+  #thang-avatar{bottom:12px;left:12px;transform:scale(0.65);transform-origin:bottom left}
+  .thang-name-tag{display:none} /* hide label on mobile */
+
+  /* ── Notifications: move to top-center, smaller ── */
+  .sys-notif{max-width:calc(100% - 24px);right:12px;left:12px;width:auto;font-size:0.76rem;padding:12px 16px;top:10px;border-radius:12px}
+  .debit-card{max-width:calc(100% - 24px);right:12px;left:12px;width:auto;font-size:0.72rem;padding:14px 16px;top:10px}
+
+  /* Calculator: center on mobile */
+  .calc-widget{right:12px;left:12px;width:auto;max-width:260px;margin:0 auto;top:60px}
   .calc-screen{font-size:1.1rem;padding:10px 12px}
-  .calc-btns button{padding:8px;font-size:0.8rem}
-  #thang-avatar{bottom:16px;left:16px}
-  .thang-card{width:60px}
-  .thang-face{width:60px;height:60px;font-size:28px}
-  .thang-name-tag{width:60px;font-size:0.55rem;padding:3px 0}
-  .cal-card{max-width:100%;padding:18px 20px}
-  .dating-card{padding:20px}
-  .cv-doc{padding:24px;font-size:0.78rem}
-  .badge-pill{font-size:0.65rem}
+  .calc-btns button{padding:10px;font-size:0.85rem}
+
+  /* Cards & widgets */
+  .cal-card{max-width:100%;padding:16px 18px;border-radius:12px}
+  .dating-card{padding:18px 16px;border-radius:16px}
+  .cv-doc{padding:20px 16px;font-size:0.78rem}
+  .cv-doc h2{font-size:0.9rem;margin:14px 0 8px}
+  .badge-pill{font-size:0.63rem;padding:5px 12px}
   .avatar-frame{width:100px;height:100px}
+
+  /* Collab tag */
+  .collab-tag{font-size:0.65rem;padding:4px 10px;top:-26px}
+
+  /* Download modal */
+  .dl-overlay{padding:16px}
+  .dl-modal{padding:24px 20px;max-width:calc(100% - 32px);border-radius:16px}
+  .dl-modal h3{font-size:1.1rem}
+  .dl-modal p{font-size:0.82rem}
+
+  /* Loading bar */
+  .load-bar{margin:14px 0}
+
+  /* Audit lines */
+  .audit-name{font-size:1.5rem}
+  .audit-line{font-size:0.85rem;line-height:2.1}
+  .audit-divider{margin:20px 0}
+
+  /* Page card watermark */
+  .page-card::after{font-size:0.6rem;top:14px;right:16px}
+
+  /* ── Landing page mobile fixes ── */
+  .landing-card{padding:36px 20px!important}
+  .landing-title{font-size:2.2rem!important;line-height:1.1!important}
+  .landing-tagline{font-size:1rem!important}
+  .landing-stamp{margin-bottom:20px!important}
+  .landing-stamp span{font-size:0.55rem!important}
+  .landing-stamp div{height:20px!important}
+  .stats-row{gap:16px!important;margin:18px 0!important;padding:14px 0!important;flex-wrap:wrap!important;justify-content:center!important}
+  .stat-item [style*="font-size:1.8rem"]{font-size:1.3rem!important}
+  .stat-item [style*="font-size:0.65rem"]{font-size:0.55rem!important;letter-spacing:0.1em!important}
+  .stat-divider{height:24px!important;align-self:center}
 }
 @keyframes cardIn{
   0%{opacity:0;transform:translateY(20px) scale(0.97);filter:blur(4px)}
@@ -378,6 +444,7 @@ select{
   animation:slideInRight 0.45s var(--ease) both;
   z-index:9998;line-height:1.6;
   backdrop-filter:blur(20px);
+  pointer-events:auto;
 }
 @keyframes slideInRight{from{transform:translateX(115%);opacity:0}to{transform:translateX(0);opacity:1}}
 .sys-notif.out{animation:slideOutRight 0.3s ease-in forwards}
@@ -432,15 +499,27 @@ select{
   overflow:hidden;
 }
 @media(max-width:600px){
-  #meet-grid{grid-template-columns:1fr!important;grid-template-rows:repeat(4,1fr)!important;gap:4px!important}
-  .meet-tile-avatar{width:40px;height:40px;font-size:1rem}
-  .meet-header{padding:0 10px;height:44px;min-height:44px}
+  #meet-grid{grid-template-columns:1fr 1fr!important;grid-template-rows:1fr 1fr!important;gap:4px!important}
+  .meet-tile-avatar{width:36px;height:36px;font-size:0.9rem}
+  .meet-tile-name{font-size:0.65rem;padding:2px 6px;bottom:4px;left:4px}
+  .meet-tile-mic{width:22px;height:22px;bottom:4px;right:4px;font-size:0.6rem}
+  .meet-header{padding:0 8px;height:40px;min-height:40px}
   .meet-header-logo span{display:none}
+  .meet-header-logo svg{width:20px;height:20px}
   .meet-header-code{display:none}
-  .meet-toolbar{height:64px;min-height:64px;padding:8px 0 12px;gap:8px}
-  .meet-tool-btn{width:40px;height:40px}
-  .meet-tool-btn.leave{padding:0 16px;font-size:0.7rem}
-  .meet-self-pip{width:120px;height:80px;bottom:12px;right:12px}
+  .meet-header-title{font-size:0.7rem}
+  .meet-header-time{font-size:0.7rem}
+  .meet-header-participants{padding:4px 10px;font-size:0.7rem}
+  .meet-toolbar{height:56px;min-height:56px;padding:6px 0 10px;gap:6px}
+  .meet-tool-btn{width:38px;height:38px}
+  .meet-tool-btn svg{width:16px;height:16px}
+  .meet-tool-btn.leave{padding:0 14px;font-size:0.68rem;gap:4px}
+  .meet-self-pip{width:110px;height:72px;bottom:10px;right:10px}
+  .meet-caption-bar{font-size:0.72rem;padding:8px 14px;max-width:90%;bottom:64px}
+  .meet-toast{font-size:0.72rem;padding:6px 14px;bottom:64px}
+  .meet-conn-warning{font-size:0.75rem;padding:10px 18px}
+  .meet-tile-status{top:4px;right:4px}
+  .meet-status-badge{font-size:0.55rem;padding:2px 5px}
 }
 body.meet-active{overflow:hidden!important}
 #fake-meet *{box-sizing:border-box}
@@ -985,26 +1064,45 @@ input:not(:disabled):not([type=color]):focus,textarea:not(:disabled):focus{
   box-shadow:0 0 0 3px var(--forest-glow),0 0 16px rgba(22,61,43,0.08)!important;
 }
 
-/* ══ Splash Mobile ══ */
-@media(max-width:480px){
-  #splash .splash-title-word{font-size:2.6rem!important}
-  #splash .splash-title-italic{font-size:2.2rem!important}
-  .welcome-page{padding:36px 18px!important;min-height:60vh}
-  .welcome-title{font-size:1.6rem!important}
-  .welcome-name{font-size:1.3rem!important}
-  .welcome-avatar{width:60px!important;height:60px!important}
-  .msg-page-wrap{padding:48px 16px}
-  .april-fools-bg{padding:36px 20px!important}
-  .af-title{font-size:2.2rem}
+/* ══ Splash + Special Pages Mobile ══ */
+@media(max-width:600px){
+  #splash .splash-title-word{font-size:2.4rem!important}
+  #splash .splash-title-italic{font-size:2rem!important}
+  #splash .splash-content{padding:0 16px}
+  #splash .splash-line-top.active{width:140px}
+  #splash .splash-est{font-size:0.55rem;margin-bottom:18px}
+  #splash .splash-tagline{font-size:0.8rem}
+  .welcome-page{padding:32px 16px!important;min-height:55vh}
+  .welcome-title{font-size:1.5rem!important}
+  .welcome-name{font-size:1.2rem!important}
+  .welcome-avatar{width:56px!important;height:56px!important}
+  .welcome-label{font-size:0.5rem!important;letter-spacing:0.3em!important}
+  .welcome-tagline{font-size:0.7rem!important}
+  .msg-page-wrap{padding:40px 14px}
+  .msg-page-wrap::before{left:-12px}
+  #page-19 [style*="font-size:1.3rem"]{font-size:1rem!important;line-height:2!important}
+  .april-fools-bg{padding:32px 16px!important;min-height:auto!important}
+  .af-badge{font-size:0.65rem;padding:6px 16px}
+  .af-title{font-size:2rem}
   .af-emoji{font-size:3rem}
-  .pattiche-title{font-size:2rem}
-  .pattiche-bubble{font-size:1.1rem;padding:16px 20px}
-  .sun-text{font-size:2rem!important}
-  .sun-sub{font-size:1.1rem!important}
-  .audit-name{font-size:1.6rem}
-  .audit-line{font-size:0.88rem}
-  .cv-doc h2{font-size:0.95rem}
-  .dl-modal{padding:24px 20px;max-width:calc(100% - 40px)}
+  .af-line{font-size:0.95rem}
+  .af-close{font-size:0.75rem}
+  .af-footer{font-size:0.6rem}
+  .pattiche-wrap{padding:28px 12px}
+  .pattiche-emoji{font-size:3.5rem}
+  .pattiche-title{font-size:1.8rem}
+  .pattiche-sub{font-size:1.05rem}
+  .pattiche-name{font-size:0.85rem}
+  .pattiche-bubble{font-size:1rem;padding:14px 18px;max-width:100%;border-width:2px}
+  .pattiche-bubble::before{border-width:10px}
+  .sun-card-enhanced{padding:32px 16px!important}
+  .sun-text{font-size:1.8rem!important}
+  .sun-sub{font-size:1rem!important}
+  .sun-card-enhanced::after{font-size:1.5rem;top:10px;right:14px}
+  /* Round 2 card mobile */
+  [id="round2-card"]{padding:28px 20px!important}
+  [id="round2-card"] img{width:60px!important;height:60px!important}
+  [id="round2-card"] p{font-size:1.1rem!important}
 }
 
 /* ══ Page 19 Message Enhanced ══ */
@@ -1133,6 +1231,54 @@ input:not(:disabled):not([type=color]):focus,textarea:not(:disabled):focus{
 @media(max-width:720px){
   #splash .splash-title-word{font-size:3.2rem}
   #splash .splash-title-italic{font-size:2.8rem}
+}
+
+/* ══ EXTRA ANIMATIONS & DESKTOP POLISH ══ */
+
+/* Smooth scroll-down indicator at bottom of tall pages */
+@keyframes scrollHint{0%,100%{transform:translateY(0);opacity:0.5}50%{transform:translateY(6px);opacity:1}}
+.scroll-hint{animation:scrollHint 2s ease-in-out infinite}
+
+/* Glassmorphism hover on page cards (desktop only) */
+@media(min-width:721px){
+  .page-card:hover{box-shadow:var(--s4);border-color:rgba(201,150,12,0.25)}
+}
+
+/* Smooth text reveal for audit/message lines */
+@keyframes textReveal{0%{opacity:0;transform:translateY(8px);filter:blur(2px)}100%{opacity:1;transform:translateY(0);filter:blur(0)}}
+.text-reveal{animation:textReveal 0.6s var(--ease) both}
+
+/* Subtle pulse for active input glow */
+@keyframes inputPulse{0%,100%{box-shadow:0 0 0 3px var(--forest-glow)}50%{box-shadow:0 0 0 5px var(--forest-glow),0 0 20px rgba(22,61,43,0.06)}}
+input:not(:disabled):not([type=color]):focus,textarea:not(:disabled):focus{animation:inputPulse 2s ease infinite}
+
+/* Staggered choice card entrance */
+@keyframes choiceSlide{0%{opacity:0;transform:translateY(12px)}100%{opacity:1;transform:translateY(0)}}
+.choice-row .choice-card{animation:choiceSlide 0.35s var(--ease) both}
+.choice-row .choice-card:nth-child(1){animation-delay:0s}
+.choice-row .choice-card:nth-child(2){animation-delay:0.08s}
+.choice-row .choice-card:nth-child(3){animation-delay:0.16s}
+.choice-row .choice-card:nth-child(4){animation-delay:0.24s}
+
+/* Typewriter cursor enhancement */
+.thang-box .cursor{box-shadow:0 0 6px var(--gold-light)}
+
+/* Confetti improvement */
+@keyframes confettiSpin{0%{transform:translateY(-10vh) rotate(0deg) scale(1);opacity:1}100%{transform:translateY(110vh) rotate(1080deg) scale(0.5);opacity:0}}
+
+/* Progress bar glow */
+#progress-fill{box-shadow:0 0 8px rgba(201,150,12,0.35)}
+
+/* Loading bar enhanced shimmer */
+.load-fill{box-shadow:0 0 12px rgba(201,150,12,0.2)}
+
+/* ══ MOBILE LANDSCAPE ══ */
+@media(max-height:500px) and (orientation:landscape){
+  .page{margin:10px auto 60px}
+  .page-card{padding:20px 16px}
+  #thang-avatar{transform:scale(0.5);transform-origin:bottom left;bottom:8px;left:8px}
+  .thang-name-tag{display:none}
+  .welcome-page{min-height:auto!important;padding:24px 16px!important}
 }
 
 /* ══ Page 3: Welcome Transition ══ */
@@ -1332,29 +1478,29 @@ input:not(:disabled):not([type=color]):focus,textarea:not(:disabled):focus{
 
 <!-- PAGE 1: LANDING -->
 <div class="page" id="page-1">
-<div class="page-card" style="text-align:center;padding:72px 64px">
+<div class="page-card landing-card" style="text-align:center;padding:72px 64px">
   <!-- Brand stamp -->
-  <div style="display:inline-flex;align-items:center;gap:10px;margin-bottom:36px">
+  <div class="landing-stamp" style="display:inline-flex;align-items:center;gap:10px;margin-bottom:36px">
     <div style="width:2px;height:32px;background:var(--gold)"></div>
     <span style="font-family:'Inter',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--forest-light)">Est. 2003 &nbsp;·&nbsp; Kerala, India</span>
     <div style="width:2px;height:32px;background:var(--gold)"></div>
   </div>
   <!-- Main title -->
-  <h1 style="font-family:'Cormorant Garamond',serif;font-size:3.6rem;font-weight:700;color:var(--forest);line-height:1.05;letter-spacing:-0.03em;margin-bottom:12px">Thangappan's<br><em style="font-style:italic;color:var(--gold)">Career Consulting</em></h1>
-  <p style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-style:italic;color:var(--ink-2);margin-bottom:6px">Professional CVs. Personal Touch. No Refunds.</p>
+  <h1 class="landing-title" style="font-family:'Cormorant Garamond',serif;font-size:3.6rem;font-weight:700;color:var(--forest);line-height:1.05;letter-spacing:-0.03em;margin-bottom:12px">Thangappan's<br><em style="font-style:italic;color:var(--gold)">Career Consulting</em></h1>
+  <p class="landing-tagline" style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-style:italic;color:var(--ink-2);margin-bottom:6px">Professional CVs. Personal Touch. No Refunds.</p>
   <!-- Stats row -->
-  <div style="display:flex;justify-content:center;gap:32px;margin:28px 0;padding:20px 0;border-top:0.5px solid var(--line);border-bottom:0.5px solid var(--line)">
-    <div>
+  <div class="stats-row" style="display:flex;justify-content:center;gap:32px;margin:28px 0;padding:20px 0;border-top:0.5px solid var(--line);border-bottom:0.5px solid var(--line)">
+    <div class="stat-item">
       <div style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:700;color:var(--forest)">10,000+</div>
       <div style="font-family:'Inter',sans-serif;font-size:0.65rem;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--ink-3)">CVs Built</div>
     </div>
-    <div style="width:0.5px;background:var(--line)"></div>
-    <div>
+    <div class="stat-divider" style="width:0.5px;background:var(--line)"></div>
+    <div class="stat-item">
       <div style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:700;color:var(--forest)">0</div>
       <div style="font-family:'Inter',sans-serif;font-size:0.65rem;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--ink-3)">Refunds Given</div>
     </div>
-    <div style="width:0.5px;background:var(--line)"></div>
-    <div>
+    <div class="stat-divider" style="width:0.5px;background:var(--line)"></div>
+    <div class="stat-item">
       <div style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:700;color:var(--forest)">★★★★★</div>
       <div style="font-family:'Inter',sans-serif;font-size:0.65rem;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--ink-3)">Self Rated</div>
     </div>
