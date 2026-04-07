@@ -5,11 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Thangappan's Career Consulting</title>
 <meta name="description" content="Professional CVs. Personal Touch. No Refunds.">
+<meta property="og:title" content="Thangappan's Career Consulting">
+<meta property="og:description" content="Professional CVs. Personal Touch. No Refunds. Est. 2003.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#163D2B">
+<link rel="manifest" href="manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&family=Caveat:wght@600;700&family=Gochi+Hand&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&family=Nunito:ital,wght@0,400;0,600;0,700;1,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 <style>
 :root{
+  color-scheme: light only;
   /* Palette */
   --bg:#F0EAE0;
   --bg-alt:#E8E0D4;
@@ -88,6 +94,33 @@ body{
 @media(max-width:720px){
   .page{margin:24px auto 60px;padding:0 14px}
   .page-card{padding:36px 28px}
+}
+@media(max-width:480px){
+  .page{margin:16px auto 40px;padding:0 10px}
+  .page-card{padding:28px 18px}
+  .page-title{font-size:2rem}
+  .page-subtitle{font-size:1rem}
+  .grid-2{grid-template-columns:1fr}
+  .choice-row{flex-direction:column}
+  .choice-card{min-width:unset}
+  .thang-box{font-size:1.1rem;padding:18px 20px}
+  .btn{padding:12px 24px;font-size:0.82rem}
+  .section-label{font-size:0.6rem}
+  .input-label{font-size:0.72rem}
+  .sys-notif{max-width:85%;right:10px;font-size:0.78rem}
+  .debit-card{max-width:calc(100% - 40px);right:10px;font-size:0.72rem}
+  .calc-widget{right:10px;width:180px}
+  .calc-screen{font-size:1.1rem;padding:10px 12px}
+  .calc-btns button{padding:8px;font-size:0.8rem}
+  #thang-avatar{bottom:16px;left:16px}
+  .thang-card{width:60px}
+  .thang-face{width:60px;height:60px;font-size:28px}
+  .thang-name-tag{width:60px;font-size:0.55rem;padding:3px 0}
+  .cal-card{max-width:100%;padding:18px 20px}
+  .dating-card{padding:20px}
+  .cv-doc{padding:24px;font-size:0.78rem}
+  .badge-pill{font-size:0.65rem}
+  .avatar-frame{width:100px;height:100px}
 }
 @keyframes cardIn{
   0%{opacity:0;transform:translateY(20px) scale(0.97);filter:blur(4px)}
@@ -397,6 +430,17 @@ select{
   display:flex;flex-direction:column;
   font-family:'Inter','Google Sans',Arial,sans-serif;
   overflow:hidden;
+}
+@media(max-width:600px){
+  #meet-grid{grid-template-columns:1fr!important;grid-template-rows:repeat(4,1fr)!important;gap:4px!important}
+  .meet-tile-avatar{width:40px;height:40px;font-size:1rem}
+  .meet-header{padding:0 10px;height:44px;min-height:44px}
+  .meet-header-logo span{display:none}
+  .meet-header-code{display:none}
+  .meet-toolbar{height:64px;min-height:64px;padding:8px 0 12px;gap:8px}
+  .meet-tool-btn{width:40px;height:40px}
+  .meet-tool-btn.leave{padding:0 16px;font-size:0.7rem}
+  .meet-self-pip{width:120px;height:80px;bottom:12px;right:12px}
 }
 body.meet-active{overflow:hidden!important}
 #fake-meet *{box-sizing:border-box}
@@ -902,6 +946,67 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:10000
 .af-confetti{position:absolute;border-radius:2px;pointer-events:none;opacity:0.65}
 @keyframes afDrift{0%{transform:translateY(-20px) rotate(0deg);opacity:0.7}100%{transform:translateY(100vh) rotate(720deg);opacity:0}}
 
+/* ══ Page Transition Variants ══ */
+@keyframes pageSlideLeft{0%{opacity:0;transform:translateX(60px)}100%{opacity:1;transform:translateX(0)}}
+@keyframes pageFadeZoom{0%{opacity:0;transform:scale(0.92);filter:blur(6px)}100%{opacity:1;transform:scale(1);filter:blur(0)}}
+@keyframes pageFadeBlack{0%{opacity:0}100%{opacity:1}}
+@keyframes pageDropIn{0%{opacity:0;transform:translateY(-40px) scale(0.95)}100%{opacity:1;transform:translateY(0) scale(1)}}
+.page-trans-slide{animation:pageSlideLeft 0.5s var(--ease) both!important}
+.page-trans-zoom{animation:pageFadeZoom 0.6s var(--ease) both!important}
+.page-trans-fade{animation:pageFadeBlack 0.8s ease both!important}
+.page-trans-drop{animation:pageDropIn 0.5s var(--ease-spring) both!important}
+
+/* ══ Button Bounce Entrance ══ */
+@keyframes btnBounceIn{0%{opacity:0;transform:translateY(12px) scale(0.9)}60%{transform:translateY(-4px) scale(1.03)}100%{opacity:1;transform:translateY(0) scale(1)}}
+.btn-appear{animation:btnBounceIn 0.4s var(--ease-spring) both}
+
+/* ══ Avatar Reaction Animations ══ */
+@keyframes avatarShake{0%,100%{transform:rotate(0)}20%{transform:rotate(-8deg)}40%{transform:rotate(8deg)}60%{transform:rotate(-4deg)}80%{transform:rotate(4deg)}}
+@keyframes avatarSmug{0%{transform:scale(1) rotate(0)}50%{transform:scale(1.1) rotate(3deg)}100%{transform:scale(1) rotate(0)}}
+@keyframes avatarThink{0%,100%{transform:translateX(0)}50%{transform:translateX(-3px)}}
+.avatar-react-angry .thang-face{animation:avatarShake 0.5s ease!important}
+.avatar-react-smug .thang-face{animation:avatarSmug 0.6s ease!important}
+.avatar-react-thinking .thang-face{animation:avatarThink 1s ease infinite!important}
+.thang-card{transition:transform 0.3s var(--ease)}
+#thang-avatar .thang-face img{transition:opacity 0.3s ease}
+
+/* ══ Enhanced CV Glitch Effect ══ */
+@keyframes glitchFlicker{0%{opacity:1}5%{opacity:0.7}10%{opacity:1}15%{clip-path:inset(20% 0 60% 0)}20%{clip-path:inset(0)}35%{clip-path:inset(60% 0 10% 0)}40%{clip-path:inset(0)}45%{opacity:0.8;transform:translateX(-3px)}50%{opacity:1;transform:translateX(0)}55%{clip-path:inset(40% 0 30% 0)}60%{clip-path:inset(0)}100%{opacity:1}}
+@keyframes glitchScan{0%{top:-100%}100%{top:100%}}
+.cv-glitching{animation:glitchFlicker 0.8s steps(1) infinite!important;position:relative}
+.cv-glitching::after{content:'';position:absolute;left:0;right:0;height:3px;background:rgba(201,150,12,0.3);animation:glitchScan 1.5s linear infinite}
+
+/* ══ Counter Animation ══ */
+@keyframes countPulse{0%{transform:scale(1)}50%{transform:scale(1.05)}100%{transform:scale(1)}}
+.stat-counting{animation:countPulse 0.3s ease}
+
+/* ══ Input Active Glow ══ */
+input:not(:disabled):not([type=color]):focus,textarea:not(:disabled):focus{
+  box-shadow:0 0 0 3px var(--forest-glow),0 0 16px rgba(22,61,43,0.08)!important;
+}
+
+/* ══ Splash Mobile ══ */
+@media(max-width:480px){
+  #splash .splash-title-word{font-size:2.6rem!important}
+  #splash .splash-title-italic{font-size:2.2rem!important}
+  .welcome-page{padding:36px 18px!important;min-height:60vh}
+  .welcome-title{font-size:1.6rem!important}
+  .welcome-name{font-size:1.3rem!important}
+  .welcome-avatar{width:60px!important;height:60px!important}
+  .msg-page-wrap{padding:48px 16px}
+  .april-fools-bg{padding:36px 20px!important}
+  .af-title{font-size:2.2rem}
+  .af-emoji{font-size:3rem}
+  .pattiche-title{font-size:2rem}
+  .pattiche-bubble{font-size:1.1rem;padding:16px 20px}
+  .sun-text{font-size:2rem!important}
+  .sun-sub{font-size:1.1rem!important}
+  .audit-name{font-size:1.6rem}
+  .audit-line{font-size:0.88rem}
+  .cv-doc h2{font-size:0.95rem}
+  .dl-modal{padding:24px 20px;max-width:calc(100% - 40px)}
+}
+
 /* ══ Page 19 Message Enhanced ══ */
 .msg-page-wrap{padding:80px 20px;max-width:520px;margin:0 auto;position:relative}
 .msg-page-wrap::before{content:'';position:absolute;top:0;left:-40px;width:2px;height:100%;background:linear-gradient(180deg,var(--gold),var(--forest-light),transparent);opacity:0.3}
@@ -1151,8 +1256,18 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:10000
 }
 
 </style>
+<!-- Favicon -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧔</text></svg>" type="image/svg+xml">
 </head>
 <body>
+<!-- noscript fallback -->
+<noscript>
+<div style="text-align:center;padding:80px 20px;font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:#163D2B;min-height:100vh;display:flex;align-items:center;justify-content:center;flex-direction:column;background:#F0EAE0">
+<p style="font-size:3rem;margin-bottom:16px">🧔</p>
+<p>Thangappan requires JavaScript to consult your career.</p>
+<p style="font-size:1rem;color:#52525B;margin-top:12px">Please enable JavaScript and refresh the page.</p>
+</div>
+</noscript>
 
 <!-- AUDIO -->
 <!-- AUDIO SLOT 1: Welcome — ponnappan.mp3 -->
@@ -1160,15 +1275,15 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:10000
 <!-- AUDIO SLOT 2: Name confirmed — keri_vaada_makkale.mp3 -->
 <audio id="audio-2" src="keri_vaada_makkale.mp3" preload="auto"></audio>
 <!-- AUDIO SLOT 3: Avatar YES click — pokkiri_raja.mp3 (renamed from original) -->
-<audio id="audio-3" src="pokkiri_raja.mp3" preload="auto"></audio>
+<audio id="audio-3" src="pokkiri_raja.mp3" preload="none"></audio>
 <!-- AUDIO SLOT 4: Soft skills BGM — place softskills_bgm.mp3 in folder -->
-<audio id="audio-4" src="softskills_bgm.mp3" preload="auto"></audio>
+<audio id="audio-4" src="softskills_bgm.mp3" preload="none"></audio>
 <!-- AUDIO SLOT 5: Glitch sting — place glitch_sting.mp3 in folder -->
-<audio id="audio-5" src="glitch_sting.mp3" preload="auto"></audio>
+<audio id="audio-5" src="glitch_sting.mp3" preload="none"></audio>
 <!-- AUDIO SLOT 6: End credits — place end_credits.mp3 in folder -->
-<audio id="audio-6" src="end_credits.mp3" preload="auto"></audio>
+<audio id="audio-6" src="end_credits.mp3" preload="none"></audio>
 <!-- AUDIO: Interview muffled voice — place muffled_voice.mp3 in folder -->
-<audio id="audio-interview" src="muffled_voice.mp3" preload="auto"></audio>
+<audio id="audio-interview" src="muffled_voice.mp3" preload="none"></audio>
 <!-- BG: Ambient loop — place carnatic_bg.mp3 in folder -->
 <audio id="audio-bg" src="carnatic_bg.mp3" preload="auto" loop></audio>
 
@@ -1732,6 +1847,31 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:10000
 </div>
 
 <script>
+/* ============ CONSOLE EASTER EGGS ============ */
+console.log("%c🧔 Thangappan's Career Consulting","font-size:24px;font-weight:bold;color:#163D2B;font-family:serif");
+console.log("%cChecking the console? Smart. Still won't save your CV though. 😌","font-size:13px;color:#C9960C;font-family:sans-serif");
+console.log("%cEst. 2003 · Kerala, India · 10,000+ CVs · 0 Regrets","font-size:11px;color:#52525B;font-family:sans-serif");
+
+/* ============ UI SOUND SYSTEM (Web Audio API) ============ */
+let audioCtx=null;
+function getAudioCtx(){if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();return audioCtx}
+function playUISound(type){
+  try{
+    const ctx=getAudioCtx();const now=ctx.currentTime;
+    const osc=ctx.createOscillator();const gain=ctx.createGain();
+    osc.connect(gain);gain.connect(ctx.destination);
+    switch(type){
+      case'click':osc.frequency.value=600;gain.gain.setValueAtTime(0.08,now);gain.gain.exponentialRampToValueAtTime(0.001,now+0.08);osc.start(now);osc.stop(now+0.08);break;
+      case'whoosh':osc.type='sawtooth';osc.frequency.setValueAtTime(200,now);osc.frequency.exponentialRampToValueAtTime(800,now+0.15);gain.gain.setValueAtTime(0.04,now);gain.gain.exponentialRampToValueAtTime(0.001,now+0.18);osc.start(now);osc.stop(now+0.18);break;
+      case'pop':osc.frequency.setValueAtTime(400,now);osc.frequency.exponentialRampToValueAtTime(200,now+0.1);gain.gain.setValueAtTime(0.1,now);gain.gain.exponentialRampToValueAtTime(0.001,now+0.12);osc.start(now);osc.stop(now+0.12);break;
+      case'ding':osc.type='sine';osc.frequency.value=880;gain.gain.setValueAtTime(0.06,now);gain.gain.exponentialRampToValueAtTime(0.001,now+0.3);osc.start(now);osc.stop(now+0.3);break;
+      case'error':osc.type='square';osc.frequency.value=200;gain.gain.setValueAtTime(0.06,now);gain.gain.exponentialRampToValueAtTime(0.001,now+0.2);osc.start(now);osc.stop(now+0.2);break;
+    }
+  }catch(e){}
+}
+// Add click sounds to all buttons
+document.addEventListener('click',function(e){if(e.target.closest('.btn,.choice-card,.meet-tool-btn'))playUISound('click')});
+
 /* ============ GLOBAL STATE ============ */
 let currentPage = 1;
 const user = {
@@ -1757,8 +1897,47 @@ function avatarUrl(seed){return`https://api.dicebear.com/7.x/adventurer/svg?seed
 function wrongColour(hex){const o=['#E63946','#2A9D8F','#E9C46A','#9B59B6','#F4A261','#1ABC9C'];return o.find(c=>c.toLowerCase()!==hex.toLowerCase())||'#E63946'}
 function setMood(m){
   const img=document.getElementById('thang-img');
-  if(img) img.src = (m==='angry'||m==='shocked') ? 'Thangappan2.jpeg' : 'Thangappan1.jpeg';
+  const avatar=document.getElementById('thang-avatar');
+  if(img){
+    // Crossfade: briefly dim, swap, fade back
+    img.style.opacity='0.3';
+    setTimeout(()=>{
+      img.src=(m==='angry'||m==='shocked')?'Thangappan2.jpeg':'Thangappan1.jpeg';
+      img.style.opacity='1';
+    },150);
+  }
+  // Avatar reaction animation
+  if(avatar){
+    avatar.classList.remove('avatar-react-angry','avatar-react-smug','avatar-react-thinking');
+    if(m==='angry'||m==='shocked') avatar.classList.add('avatar-react-angry');
+    else if(m==='smug'||m==='loving') avatar.classList.add('avatar-react-smug');
+    else if(m==='thinking') avatar.classList.add('avatar-react-thinking');
+    // Remove after animation
+    setTimeout(()=>avatar.classList.remove('avatar-react-angry','avatar-react-smug','avatar-react-thinking'),800);
+  }
 }
+// Avatar click easter egg
+const avatarClickLines=['stop poking me 😤','i\'m working here 🙂','you think this is a game? ...it is. 😌','go fill your cv 😐','one more poke and i\'m leaving 🤬','...okay that one tickled 🤭'];
+let avatarClickIdx=0;
+document.addEventListener('DOMContentLoaded',()=>{
+  const face=document.getElementById('thang-face-el');
+  if(face) face.addEventListener('click',()=>{
+    const avatar=document.getElementById('thang-avatar');
+    if(avatar){
+      avatar.classList.add('avatar-react-smug');
+      setTimeout(()=>avatar.classList.remove('avatar-react-smug'),600);
+    }
+    playUISound('pop');
+    // Show a tiny floating tooltip
+    const tip=document.createElement('div');
+    tip.style.cssText='position:fixed;bottom:140px;left:28px;background:var(--forest);color:white;padding:8px 14px;border-radius:12px;font-family:Gochi Hand,cursive;font-size:0.9rem;z-index:1001;opacity:0;transition:opacity 0.3s,transform 0.3s;transform:translateY(8px);pointer-events:none;max-width:200px';
+    tip.textContent=avatarClickLines[avatarClickIdx%avatarClickLines.length];
+    avatarClickIdx++;
+    document.body.appendChild(tip);
+    requestAnimationFrame(()=>{tip.style.opacity='1';tip.style.transform='translateY(0)'});
+    setTimeout(()=>{tip.style.opacity='0';tip.style.transform='translateY(-8px)';setTimeout(()=>tip.remove(),300)},2000);
+  });
+});
 
 function playAudio(slotId){
   const el=document.getElementById('audio-'+slotId);
@@ -1774,6 +1953,7 @@ function typeWrite(boxId,text,onComplete){
   const box=document.getElementById(boxId);
   box.classList.remove('hidden');
   box.innerHTML='<span class="cursor"></span>';
+  playUISound('pop');
   let i=0;
   const iv=setInterval(()=>{
     if(i<text.length){box.innerHTML=text.slice(0,++i)+'<span class="cursor"></span>'}
@@ -1781,18 +1961,35 @@ function typeWrite(boxId,text,onComplete){
   },30);
 }
 
+// Page transition variants
+const pageTransitions=['page-trans-slide','page-trans-zoom','page-trans-fade','page-trans-drop'];
+const dramaticPages={'10':true,'17':true,'18':true,'19':true};
+let transitionIdx=0;
 function goPage(n){
-  document.querySelectorAll('.page').forEach(p=>p.classList.add('hidden'));
+  playUISound('whoosh');
+  document.querySelectorAll('.page').forEach(p=>{
+    p.classList.add('hidden');
+    p.classList.remove(...pageTransitions);
+  });
   const el=document.getElementById('page-'+n);
   if(!el)return;
   el.classList.remove('hidden');
-  el.style.animation='none';el.offsetHeight;el.style.animation='';
+  // Apply varied transition
   const ns=String(n);
+  let trans;
+  if(dramaticPages[ns]) trans='page-trans-zoom';
+  else{trans=pageTransitions[transitionIdx%pageTransitions.length];transitionIdx++}
+  el.classList.add(trans);
+  // Force reflow for animation restart
+  el.style.animation='none';el.offsetHeight;el.style.animation='';
   let pn=parseFloat(ns);
   if(ns.includes('a'))pn=parseFloat(ns.replace('a',''))+0.3;
   if(ns.includes('b'))pn=parseFloat(ns.replace('b',''))+0.5;
   if(ns.includes('c'))pn=parseFloat(ns.replace('c',''))+0.7;
-  document.getElementById('progress-fill').style.width=Math.min(pn/20*100,100)+'%';
+  const pf=document.getElementById('progress-fill');
+  pf.style.width=Math.min(pn/20*100,100)+'%';
+  // Pulse progress bar on transition
+  pf.style.filter='brightness(1.4)';setTimeout(()=>pf.style.filter='',400);
   currentPage=n;
   window.scrollTo({top:0,behavior:'smooth'});
   const fnName='initPage'+String(n).replace('.','_').replace('a','a').replace('b','b').replace('c','c');
@@ -1881,12 +2078,29 @@ function startConsultation(){
 /* ============ PAGE 1 ============ */
 window.addEventListener('DOMContentLoaded',()=>{
   // Audio-1 deferred to first user click (browser autoplay policy)
+  // Animate stats counter on landing page
+  animateStats();
   setTimeout(()=>{
     typeWrite('p1-box',"Hello. 👋 I am Thangappan. CV expert. THE CV expert, actually. Don't google me — Google is not ready for that search.",()=>{
-      document.getElementById('p1-start').classList.remove('hidden');
+      const startBtn=document.getElementById('p1-start');
+      startBtn.classList.remove('hidden');
+      startBtn.classList.add('btn-appear');
     });
   },1500);
 });
+/* Stats counter animation */
+function animateStats(){
+  const statEls=document.querySelectorAll('#page-1 .page-card [style*="font-size:1.8rem"]');
+  if(!statEls.length)return;
+  // First stat: count 0 → 10,000+
+  const s1=statEls[0];if(s1){const target=10000;let cur=0;
+    const iv=setInterval(()=>{cur+=Math.ceil((target-cur)*0.08);if(cur>=target){cur=target;clearInterval(iv);s1.textContent='10,000+'}else{s1.textContent=cur.toLocaleString()}},30)}
+  // Second stat: just show 0 with a pop
+  const s2=statEls[1];if(s2){s2.textContent='0';s2.classList.add('stat-counting')}
+  // Third stat: fill stars one by one
+  const s3=statEls[2];if(s3){s3.textContent='';const stars='★★★★★';let si=0;
+    const iv2=setInterval(()=>{if(si<stars.length){s3.textContent+=stars[si++]}else{clearInterval(iv2)}},200)}
+}
 
 /* ============ PAGE 2 ============ */
 function p2Submit(){
@@ -3027,25 +3241,38 @@ window.initPage17=function(){
   <h2>Skills</h2><p>${user.skills}</p>
   <h2>Soft Skills</h2><p>${user.softSkills}</p>
   <h2>References</h2><p>${user.refName} — ${user.refNumber}</p>`;
-  // After 2s, glitch
+  // After 2s, enhanced glitch
   setTimeout(()=>{
     playAudio('5');
+    playUISound('error');
+    // Phase 1: CSS glitch flicker on the CV
+    cv.classList.add('cv-glitching');
+    cv.style.color='#c00';
+    // Phase 2: Progressively corrupt text
     const text=cv.textContent;let chars=text.split('');
-    const glitchChars='!@#$%^&*()_+-=[]{}|;:,.<>?/~`';
+    const glitchChars='!@#$%^&*()_+-=[]{}|;:,.<>?/~`░▒▓█';
     let idx=0;
     const iv=setInterval(()=>{
       if(idx<chars.length){
-        chars[idx]=glitchChars[Math.floor(Math.random()*glitchChars.length)];
-        cv.textContent=chars.join('');idx+=3;
+        // Corrupt multiple characters per frame for chaos
+        for(let g=0;g<4&&idx<chars.length;g++,idx++){
+          chars[idx]=glitchChars[Math.floor(Math.random()*glitchChars.length)];
+        }
+        cv.textContent=chars.join('');
+        // Random color flashes during corruption
+        if(Math.random()>0.7) cv.style.color=['#c00','#0f0','#ff0','#0ff','#f0f'][Math.floor(Math.random()*5)];
       }else{clearInterval(iv);
+        cv.classList.remove('cv-glitching');
         cv.style.display='none';
         const gl=document.getElementById('p17-glitch');gl.classList.remove('hidden');
         gl.innerHTML=`<strong>NAME:</strong> ${user.displayName}<br><strong>PHOTO:</strong> <img src="${user.avatar}" style="width:60px;height:60px;border-radius:50%;filter:contrast(1.5) hue-rotate(30deg);vertical-align:middle"><br><strong>SKILLS:</strong> hidden. thangappan says so.<br><strong>EXPERIENCE:</strong> we tried.<br><strong>SOFT SKILLS:</strong> very soft<br><strong>REFERENCE:</strong> ${user.refName} (batman)<br><strong>STATUS:</strong> ${user.status||'unknown'}<br><strong>ASTROLOGY:</strong> ${user.rashi||'N/A'} energy detected<br><strong>BMI:</strong> ${user.bmiCategory}<br><strong>FAVOURITE COLOUR:</strong> ${user.color} (shown <span style="color:${user.wrongColor}">${user.wrongColor}</span>)<br><br><strong>VERDICT:</strong> this is not a cv. scroll down.`;
-        document.getElementById('page-17').querySelector('.page-card').style.background='#111';
-        document.getElementById('page-17').querySelector('.page-card').style.color='#ccc';
+        const card17=document.getElementById('page-17').querySelector('.page-card');
+        card17.style.transition='background 0.8s,color 0.8s';
+        card17.style.background='#111';
+        card17.style.color='#ccc';
         setTimeout(()=>{document.getElementById('p17-scroll').classList.remove('hidden')},2000);
       }
-    },20);
+    },25);
   },2000);
 };
 

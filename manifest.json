@@ -1,0 +1,10 @@
+{
+  "name": "Thangappan's Career Consulting",
+  "short_name": "ThangappanCV",
+  "description": "Professional CVs. Personal Touch. No Refunds.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F0EAE0",
+  "theme_color": "#163D2B",
+  "icons": []
+}
