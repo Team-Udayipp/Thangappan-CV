@@ -6,7 +6,7 @@
 
 What starts as a sleek, professional web application slowly devolves into a 20-stage psychological journey involving deep-seated personal questions, a deceptive Google Meet interview simulation, fake debit deductions, and a chaotic "Life Audit" — all guided by the eccentric, unyielding personality of Thangappan.
 
-✨ **Live Demo:** [Click here to begin your consultation](https://alanali-byte.github.io/Thangappan-CV/)
+✨ **Live Demo:** [Click here to begin your consultation](https://thangappan-cv.vercel.app/)
 
 ---
 
