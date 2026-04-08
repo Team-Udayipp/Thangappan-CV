@@ -321,8 +321,8 @@ select{
   border-radius:2px 18px 18px 18px;
   padding:24px 30px;
   margin:32px 0 20px;
-  font-family:'Gochi Hand',cursive;
-  font-size:1.3rem;font-weight:400;line-height:1.9;
+  font-family:'Playfair Display',serif;
+  font-size:1.15rem;font-weight:400;line-height:1.75;
   position:relative;
   box-shadow:6px 6px 0 var(--gold),var(--s3);
   border:1px solid rgba(255,255,255,0.04);
@@ -1401,6 +1401,68 @@ input:not(:disabled):not([type=color]):focus,textarea:not(:disabled):focus{anima
   .welcome-avatar{width:72px;height:72px}
 }
 
+/* ══ Camera Module ══ */
+#camera-module{
+  margin:24px 0;text-align:center;
+  animation:cardIn 0.5s var(--ease-spring) both;
+}
+#webcam-feed{
+  width:100%;max-width:400px;border-radius:var(--r);
+  border:3px solid var(--gold);
+  box-shadow:0 0 0 6px rgba(201,150,12,0.1),var(--s3);
+  background:#000;
+  transform:scaleX(-1);
+  transition:opacity 0.4s ease;
+}
+#webcam-canvas{
+  width:100%;max-width:400px;border-radius:var(--r);
+  border:3px solid var(--red);
+  box-shadow:0 0 0 6px rgba(153,27,27,0.15),0 0 40px rgba(153,27,27,0.1),var(--s3);
+  animation:capturedPulse 2s ease-in-out infinite;
+}
+@keyframes capturedPulse{
+  0%,100%{box-shadow:0 0 0 6px rgba(153,27,27,0.15),0 0 40px rgba(153,27,27,0.1),var(--s3)}
+  50%{box-shadow:0 0 0 8px rgba(153,27,27,0.25),0 0 60px rgba(153,27,27,0.18),var(--s3)}
+}
+.camera-actions{
+  display:flex;gap:12px;justify-content:center;margin-top:16px;
+  animation:btnBounceIn 0.4s var(--ease-spring) both;
+  animation-delay:0.3s;
+}
+.camera-focusing{
+  animation:pulse 0.8s ease-in-out infinite!important;
+  pointer-events:none;opacity:0.7;
+}
+.camera-viewfinder{
+  position:relative;display:inline-block;
+}
+.camera-viewfinder::before,.camera-viewfinder::after{
+  content:'';position:absolute;width:24px;height:24px;
+  border-color:var(--gold);border-style:solid;
+  pointer-events:none;z-index:2;
+  transition:border-color 0.3s;
+}
+.camera-viewfinder::before{top:8px;left:calc(50% - 200px + 8px);border-width:2px 0 0 2px;border-radius:4px 0 0 0}
+.camera-viewfinder::after{bottom:8px;right:calc(50% - 200px + 8px);border-width:0 2px 2px 0;border-radius:0 0 4px 0}
+.camera-viewfinder.captured::before,.camera-viewfinder.captured::after{border-color:var(--red)}
+
+/* ══ Thang-box Premium Fade-in ══ */
+.thang-box:not(.hidden){
+  animation:thangBoxReveal 0.45s var(--ease) both;
+}
+@keyframes thangBoxReveal{
+  0%{opacity:0;transform:translateY(10px);filter:blur(2px)}
+  100%{opacity:1;transform:translateY(0);filter:blur(0)}
+}
+
+/* ══ Camera Module Mobile ══ */
+@media(max-width:600px){
+  #webcam-feed,#webcam-canvas{max-width:100%;border-radius:var(--r-sm)}
+  .camera-actions{flex-direction:column;gap:8px}
+  .camera-viewfinder::before{left:8px}
+  .camera-viewfinder::after{right:8px}
+}
+
 </style>
 <!-- Favicon -->
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧔</text></svg>" type="image/svg+xml">
@@ -1590,6 +1652,19 @@ input:not(:disabled):not([type=color]):focus,textarea:not(:disabled):focus{anima
     </div>
   </div>
   <div class="thang-box hidden" id="p4-final-box"></div>
+  <!-- Camera Module -->
+  <div id="camera-module" class="hidden">
+    <div class="camera-viewfinder">
+      <video id="webcam-feed" autoplay playsinline muted></video>
+      <canvas id="webcam-canvas" class="hidden"></canvas>
+    </div>
+    <div class="camera-actions">
+      <button id="btn-upload-fake" class="btn btn-ghost" onclick="handleUploadFake()">Upload Photo 📁</button>
+      <button id="btn-capture-fake" class="btn btn-primary" onclick="handleCaptureFake()">TAKE PHOTO 📸</button>
+    </div>
+  </div>
+  <div class="thang-box hidden" id="p4-camera-box"></div>
+  <div class="thang-box hidden" id="p4-camera-box2"></div>
   <button class="btn btn-primary btn-full hidden" id="p4-next" onclick="goPage(5)" style="margin-top:16px">Next →</button>
 </div>
 </div>
@@ -2025,7 +2100,7 @@ const user = {
   snack:'',avatar:'',phone:'',email:'',city:'',education:'',grade:0,subject:'',mathAttempt:'',
   experience:'',jobTitle:'',company:'',skills:'',hiddenSkills:'',softSkills:'',status:'',
   rashi:'',partnerDesc:'',color:'',wrongColor:'',refName:'',refNumber:'',description:'',
-  trueDescription:'',aiDep:'',sessionStart:Date.now(),interviewDone:false,cameraStream:null,location:null
+  trueDescription:'',aiDep:'',sessionStart:Date.now(),interviewDone:false,cameraStream:null,cameraDenied:false,location:null
 };
 const moods={default:'🧔',happy:'😄',smug:'😌',angry:'🤬',thinking:'🤔',shocked:'😱',loving:'🥰',sad:'😢',sombrero:'🧔'};
 
@@ -2395,14 +2470,174 @@ function doScreenshot(){
   },1500);
 }
 function p4AvatarYes(){
-  playAudio('3');setMood('loving');
+  setMood('angry');
   document.getElementById('p4-avatar-section').querySelectorAll('button').forEach(b=>b.disabled=true);
-  typeWrite('p4-final-box','Liar. 🙂 But okay.',()=>{document.getElementById('p4-next').classList.remove('hidden')});
+  typeWrite('p4-final-box','Liar 🙂 but ok. I know you ain\'t this 🤬🤬 show your REAL FACE 🤨',()=>{
+    initCameraModule();
+  });
 }
 function p4AvatarNo(){
   setMood('smug');
   document.getElementById('p4-avatar-section').querySelectorAll('button').forEach(b=>b.disabled=true);
-  typeWrite('p4-final-box',"Look — I did my best. This is what the data gave me. Maybe the data is right.",()=>{document.getElementById('p4-next').classList.remove('hidden')});
+  typeWrite('p4-final-box','Look, I did my best. This is what the data gave me. Fine, if you think you are better, take your photo 😤',()=>{
+    initCameraModule();
+  });
+}
+
+/* ============ CAMERA MODULE ============ */
+function initCameraModule(){
+  // Just show the module with buttons — camera is requested when user clicks TAKE PHOTO
+  const mod=document.getElementById('camera-module');
+  mod.classList.remove('hidden');
+  mod.scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+function handleUploadFake(){
+  // Block upload — Thangappan won't allow it
+  setMood('angry');
+  document.getElementById('btn-upload-fake').disabled=true;
+  document.body.classList.add('shake');setTimeout(()=>document.body.classList.remove('shake'),700);
+  playUISound('error');
+  typeWrite('p4-camera-box','Uh-Ah you are not going to upload photos you are going to upload AI generated lies 🤬 and i won\'t let you 😤 TAKE YOUR PHOTO NOW NO MATTER WHERE YOU ARE AND WHAT YOU ARE DOING 😡',()=>{});
+}
+
+function cameraAudioLock(){
+  // Play audio-3 and lock page until it finishes
+  playAudio('3');
+  const audio3=document.getElementById('audio-3');
+  let proceeded=false;
+  function proceed(){
+    if(proceeded)return;
+    proceeded=true;
+    document.getElementById('p4-next').classList.remove('hidden');
+    document.getElementById('p4-next').classList.add('btn-appear');
+  }
+  audio3.addEventListener('ended',function onEnd(){
+    audio3.removeEventListener('ended',onEnd);
+    proceed();
+  });
+  audio3.addEventListener('error',function onErr(){
+    audio3.removeEventListener('error',onErr);
+    setTimeout(proceed,3000);
+  });
+  setTimeout(proceed,15000);
+}
+
+function handleCameraDenied(){
+  user.cameraDenied=true;
+  document.getElementById('camera-module').classList.add('hidden');
+  setMood('angry');
+  typeWrite('p4-camera-box','You denied camera access?? COWARD. 😤 Fine, we\'ll use the AI garbage. Your loss.',()=>{
+    cameraAudioLock();
+  });
+}
+
+function handleCaptureFake(){
+  const btn=document.getElementById('btn-capture-fake');
+  btn.disabled=true;
+  btn.innerHTML='Requesting camera&hellip;';
+  btn.classList.add('camera-focusing');
+  document.getElementById('btn-upload-fake').disabled=true;
+  setMood('thinking');
+
+  // Check if mediaDevices API is available at all
+  if(!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia){
+    handleCameraDenied();
+    return;
+  }
+
+  // === Request camera with SIMPLEST constraints (no facingMode/resolution) ===
+  try{
+    navigator.mediaDevices.getUserMedia({video:true})
+      .then(stream=>{
+        user.cameraStream=stream;
+        user.cameraDenied=false;
+        const video=document.getElementById('webcam-feed');
+        video.srcObject=stream;
+        video.play().catch(()=>{});
+        // Camera is live — now run fake-failure → surprise-snap
+        runCaptureSequence();
+      })
+      .catch(err=>{
+        console.error('getUserMedia failed:',err.name,err.message);
+        // Show error detail so user can report the issue
+        user.cameraDenied=true;
+        document.getElementById('camera-module').classList.add('hidden');
+        setMood('angry');
+        const errDetail=err.name||'Unknown';
+        typeWrite('p4-camera-box','Camera failed ('+errDetail+'). 😤 Fine, we\'ll use the AI garbage.',()=>{
+          cameraAudioLock();
+        });
+      });
+  }catch(e){
+    console.error('getUserMedia exception:',e);
+    handleCameraDenied();
+  }
+}
+
+function runCaptureSequence(){
+  const btn=document.getElementById('btn-capture-fake');
+  btn.innerHTML='Focusing&hellip;';
+
+  // === PHASE 1: Fake "focusing" for 1.8s ===
+  setTimeout(()=>{
+    // === PHASE 2: FAKE FAILURE — camera appears to glitch out ===
+    btn.classList.remove('camera-focusing');
+    btn.innerHTML='⚠️ Camera Error';
+    btn.style.background='#7F1D1D';btn.style.color='#fff';
+    btn.style.opacity='1';btn.style.pointerEvents='none';
+    document.body.classList.add('shake');setTimeout(()=>document.body.classList.remove('shake'),700);
+    playUISound('error');
+    setMood('angry');
+
+    typeWrite('p4-camera-box','What?? Camera not working?! 😤 Useless device. Hold on... let me try from MY side...',()=>{
+
+      // === PHASE 3: SURPRISE SNAP — user is relaxed, Thangappan strikes ===
+      setTimeout(()=>{
+        const video=document.getElementById('webcam-feed');
+        const canvas=document.getElementById('webcam-canvas');
+        const viewfinder=document.querySelector('.camera-viewfinder');
+        canvas.width=video.videoWidth||640;
+        canvas.height=video.videoHeight||480;
+        const ctx=canvas.getContext('2d');
+        ctx.translate(canvas.width,0);
+        ctx.scale(-1,1);
+        ctx.drawImage(video,0,0,canvas.width,canvas.height);
+
+        // FLASH!
+        const fl=document.getElementById('flash');
+        fl.style.transition='opacity 0.08s';fl.style.opacity='1';
+        setTimeout(()=>{fl.style.transition='opacity 0.5s';fl.style.opacity='0'},180);
+
+        // Shutter sound
+        try{const ac=getAudioCtx(),os=ac.createOscillator(),gn=ac.createGain();os.connect(gn);gn.connect(ac.destination);os.frequency.value=1200;gn.gain.value=0.15;os.start();os.stop(ac.currentTime+0.06)}catch(e){}
+
+        // Swap video for frozen canvas
+        video.classList.add('hidden');
+        canvas.classList.remove('hidden');
+        if(viewfinder) viewfinder.classList.add('captured');
+
+        // Stop camera stream
+        if(user.cameraStream){user.cameraStream.getTracks().forEach(t=>t.stop());user.cameraStream=null}
+
+        // Hide buttons
+        document.querySelector('.camera-actions').classList.add('hidden');
+
+        // System notification
+        const notif=document.createElement('div');notif.className='sys-notif';
+        notif.innerHTML='📸 <strong>ThangappanCV</strong><br>Photo captured successfully!<br>"'+user.displayName+'_caught_lacking.jpg"';
+        document.body.appendChild(notif);
+        setTimeout(()=>{notif.classList.add('out');setTimeout(()=>notif.remove(),500)},4000);
+
+        setMood('happy');
+        typeWrite('p4-camera-box2','GOT YOU 📸😂 Perfect. This is going in the CV. No filter needed — reality is filter enough. 🤣',()=>{});
+
+        // Play audio-3 at snap + lock page
+        cameraAudioLock();
+
+      },2000); // 2s delay — user thinks camera broke, THEN snap
+    });
+  },1800); // 1.8s fake focusing
 }
 /* ============ PAGE 5: CONTACT ============ */
 function p5PhoneSubmit(){
